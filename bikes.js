@@ -63,6 +63,7 @@ const getMixer = () => {
 const bikeify = (el) => {
   const color = el.getAttribute('color') || '#FFF';
   const freq = el.getAttribute('frequency') || 440;
+  const base = el.getAttribute('base') || '';
 
   style(el, {
     position: 'relative',
@@ -71,7 +72,7 @@ const bikeify = (el) => {
     height: '300px'
   });
 
-  colorImage('bikeframe.png', color).then(canvas => {
+  colorImage(base + 'bikeframe.png', color).then(canvas => {
     style(canvas, { width: '100%', height: '100%' });
     el.appendChild(canvas);
   });
@@ -86,7 +87,7 @@ const bikeify = (el) => {
   });
   el.appendChild(pedalAssembly);
 
-  colorImage('bikespinner.png', color).then(canvas => {
+  colorImage(base + 'bikespinner.png', color).then(canvas => {
     style(canvas, {
       position: 'absolute',
       top: '0px',
@@ -100,7 +101,7 @@ const bikeify = (el) => {
   let animCheckpoint = null;
   let animStart = null;
 
-  colorImage('bikepedal.png', color).then(canvas => {
+  colorImage(base + 'bikepedal.png', color).then(canvas => {
     style(canvas, {
       position: 'absolute',
       top: '30px',

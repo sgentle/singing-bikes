@@ -51,6 +51,7 @@ var getMixer = function () {
 var bikeify = function (el) {
   var color = el.getAttribute('color') || '#FFF';
   var freq = el.getAttribute('frequency') || 440;
+  var base = el.getAttribute('base') || '';
 
   style(el, {
     position: 'relative',
@@ -59,7 +60,7 @@ var bikeify = function (el) {
     height: '300px'
   });
 
-  colorImage('bikeframe.png', color).then(function (canvas) {
+  colorImage(base + 'bikeframe.png', color).then(function (canvas) {
     style(canvas, { width: '100%', height: '100%' });
     el.appendChild(canvas);
   });
@@ -74,7 +75,7 @@ var bikeify = function (el) {
   });
   el.appendChild(pedalAssembly);
 
-  colorImage('bikespinner.png', color).then(function (canvas) {
+  colorImage(base + 'bikespinner.png', color).then(function (canvas) {
     style(canvas, {
       position: 'absolute',
       top: '0px',
@@ -88,7 +89,7 @@ var bikeify = function (el) {
   var animCheckpoint = null;
   var animStart = null;
 
-  colorImage('bikepedal.png', color).then(function (canvas) {
+  colorImage(base + 'bikepedal.png', color).then(function (canvas) {
     style(canvas, {
       position: 'absolute',
       top: '30px',
