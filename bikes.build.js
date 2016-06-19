@@ -171,6 +171,8 @@ var bikeify = function (el) {
     oldspeed = speed;
     speed = newspeed;
     var dur = 1/speed * MIN_DURATION;
+    if (!isFinite(dur)) dur = 10000000000;
+
     var olddur = 1/oldspeed * MIN_DURATION;
     var rotations = (Date.now() - animCheckpoint) / olddur;
     offset = (offset + rotations) % 1;
@@ -198,7 +200,6 @@ var bikeify = function (el) {
     vibratogain.gain.value = scale * 0.1;
     gain.gain.value = scale * 0.233;
     mixer(scale);
-
   }
 
   var ACCEL = 0.05;
@@ -217,7 +218,10 @@ var bikeify = function (el) {
       }
       else {
         updateSpeed(speed * (1 - FRICTION));
-        if (speed < STOP) stopTimer();
+        if (speed < STOP) {
+          updateSpeed(0);
+          stopTimer();
+        }
       }
     }, 100);
   };
